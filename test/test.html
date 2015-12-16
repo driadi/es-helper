@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <link rel="stylesheet" href="css/test.css" type="text/css"/>
+    <script type="text/javascript" src="../dist/es-helper.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var esHelper = new ESHelper('http://54.215.234.117:9200/combinedprofile-v1.0.2');
+
+            function success(data) {
+                var response = JSON.stringify(data, null, "\t");
+                $('.output').removeClass('error').addClass('success').text(response);
+            }
+
+            $("#btnClear").click(function () {
+                $("#txtUrl").val("");
+                $("textarea").val("");
+                $('.output').text('');
+            });
+
+            $("#btnSubmit").click(function () {
+//                var url = $('#txtUrl').val();
+//                var requestType = $('#ddlType').val();
+//                var data = JSON.parse($("#txtData").val().trim() || null);
+//                var options = JSON.parse($("#txtOptions").val().trim() || '{}');
+//                options[FindlyAjax.supportedOptions.SUCCESS_CALLBACK] = success;
+//                options[FindlyAjax.supportedOptions.ERROR_CALLBACK] = error;
+//
+//                $('.output').text('');
+//
+//                if (requestType === 'get') {
+//                    FindlyAjax[requestType](url, options);
+//                } else {
+//                    FindlyAjax[requestType](url, data, options);
+//                }
+                esHelper.search(null, success);
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>Findly Ajax Test Page</h1>
+<table>
+
+    <tr>
+        <td>URL</td>
+        <td>
+            <input type="text" id="txtUrl" />
+        </td>
+    </tr>
+    <tr>
+        <td>Data:</td>
+        <td>
+                <textarea id="txtData" rows="10">
+                </textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <input type="button" id="btnSubmit" value="Submit" />
+            <input type="button" id="btnClear" value="Clear" />
+        </td>
+    </tr>
+</table>
+
+<div class="output">
+</div>
+</body>
+</html>

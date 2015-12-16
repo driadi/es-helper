@@ -1,0 +1,43 @@
+{
+  "name": "es-helper",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/driadi/es-helper",
+  "author": {
+    "name": "Denny Riadi",
+    "email": "denny.riadi@findly.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/driadi/es-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/driadi/es-helper/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/driadi/es-helper/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "./src/es-helper.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "browserify": "9.0.3",
+    "gulp": "3.9.0",
+    "gulp-jshint": "1.9.2",
+    "jshint-stylish": "1.0.1",
+    "run-sequence": "1.0.2",
+    "vinyl-buffer": "1.0.0",
+    "vinyl-source-stream": "1.0.0"
+  },
+  "dependencies": {
+    "findly-ajax": "https://s3-us-west-1.amazonaws.com/findly.builds/ajax/builds/0.0.6.tar.gz"
+  },
+  "keywords": []
+}
