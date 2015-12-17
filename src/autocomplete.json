@@ -1,0 +1,80 @@
+{
+  "size": 5,
+  "query": {
+    "filtered": {
+      "query": {}
+    }
+  },
+  "aggs": {
+    "Name": {
+      "terms": {
+        "field": "Profile.PersonalDetail.FirstName",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "LastName": {
+      "terms": {
+        "field": "Profile.PersonalDetail.LastName",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Email": {
+      "terms": {
+        "field": "Profile.PersonalDetail.Email.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Job": {
+      "terms": {
+        "field": "Profile.ProfessionalDetail.WorkHistories.JobTitle.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Notes": {
+      "terms": {
+        "field": "OrganizationProfile.Notes.Content.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Tags": {
+      "terms": {
+        "field": "OrganizationProfile.Tags.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Campaigns": {
+      "terms": {
+        "field": "OrganizationProfile.Campaigns.Name.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Location": {
+      "terms": {
+        "field": "Profile.PersonalDetail.Location.City.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Education": {
+      "terms": {
+        "field": "Profile.ProfessionalDetail.Education.CourseMajor.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    },
+    "Career Interests": {
+      "terms": {
+        "field": "Profile.ProfessionalDetail.Interests.Title.raw",
+          "size": 5,
+          "exclude": ""
+      }
+    }
+  }
+}

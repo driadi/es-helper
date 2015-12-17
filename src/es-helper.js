@@ -1,33 +1,40 @@
 'use strict';
 
 var es = require('elasticsearch'),
-  queryBuilder = require('./query-builder'),
-  pacman = require('./pacman.json');
+  queryBuilder = require('./query-builder');
 
 function ESHelper(host) {
-  this.host = host;
-
-  this.esClient = new es.Client({
+  var esClient = new es.Client({
     host: host,
     log: 'trace'
   });
-}
 
-ESHelper.prototype.search = function(queries, callback) {
-  var data = { body: {}},
-    handlers = {
-    success: callback,
-    error: function(err) {
-      console.error(err);
-      callback(null);
-    }
+  function search(jsonData, cb) {
+    var data = { body: {} },
+      handlers = {
+        success: cb,
+        error: function(err) {
+          console.error(err);
+          cb(null);
+        }
+      };
+
+    data.body = jsonData;
+    esClient.search(data).then(handlers.success, handlers.error);
+  }
+
+  this.autoComplete = function(queries, callback) {
+    var autoCompleteJson = require('./autocomplete.json');
+    autoCompleteJson.query.filtered.query = queryBuilder.parse(queries);
+    search(autoCompleteJson, callback);
   };
 
-  pacman.query.filtered.query = queryBuilder.parse(queries);
-  data.body = pacman;
-
-  this.esClient.search(data).then(handlers.success, handlers.error);
-};
+  this.pieChart = function(queries, callback) {
+    var pacmanJson = require('./pacman.json');
+    pacmanJson.query.filtered.query = queryBuilder.parse(queries);
+    search(pacmanJson, callback);
+  };
+}
 
 if (window) {
   window.ESHelper = ESHelper;

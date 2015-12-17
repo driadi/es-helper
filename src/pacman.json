@@ -139,7 +139,7 @@
         }
       },
       "aggs": {
-        "Interests.Exist": {
+        "Interests.Exists": {
           "terms": {
             "field": "Profile.ProfessionalDetail.Interests.Title.raw",
             "size": 5,
