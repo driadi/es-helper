@@ -3,10 +3,13 @@
 <head>
     <title>Test Page</title>
     <link rel="stylesheet" href="css/test.css" type="text/css"/>
+
+    <script src="https://lodash.com/_js/lodash.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="../dist/es-helper.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
-            var esHelper = new ESHelper('http://54.215.234.117:9200/combinedprofile-v1.0.2');
+            var esHelper = new ESHelper('http://54.67.117.39:9200/combinedprofile-v1.0.4');
 
             function success(data) {
                 var response = JSON.stringify(data, null, "\t");
@@ -22,7 +25,7 @@
             $("#btnSubmit").click(function () {
 //                var url = $('#txtUrl').val();
 //                var requestType = $('#ddlType').val();
-//                var data = JSON.parse($("#txtData").val().trim() || null);
+                var data = JSON.parse($("#txtData").val().trim() || null);
 //                var options = JSON.parse($("#txtOptions").val().trim() || '{}');
 //                options[FindlyAjax.supportedOptions.SUCCESS_CALLBACK] = success;
 //                options[FindlyAjax.supportedOptions.ERROR_CALLBACK] = error;
@@ -34,13 +37,13 @@
 //                } else {
 //                    FindlyAjax[requestType](url, data, options);
 //                }
-                esHelper.search(null, success);
+                esHelper.search(data, success);
             });
         });
     </script>
 </head>
 <body>
-<h1>Findly Ajax Test Page</h1>
+<h1>Test Page</h1>
 <table>
 
     <tr>

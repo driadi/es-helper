@@ -1,0 +1,157 @@
+{
+  "size": 10,
+  "query": {
+    "filtered": {
+      "query": {}
+    }
+  },
+  "aggs": {
+    "Current Job": {
+      "filter": {
+        "exists": {
+          "field": "Profile.ProfessionalDetail.WorkHistories"
+        }
+      },
+      "aggs": {
+        "Current Job.Exists": {
+          "terms": {
+            "field": "Profile.ProfessionalDetail.WorkHistories.JobTitle.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Current Job.Total": {
+          "cardinality": {
+            "field": "Profile.ProfessionalDetail.WorkHistories.JobTitle.raw"
+          }
+        }
+      }
+    },
+    "Company": {
+      "filter": {
+        "exists": {
+          "field": "Profile.ProfessionalDetail.WorkHistories.Employer"
+        }
+      },
+      "aggs": {
+        "Company.Exists": {
+          "terms": {
+            "field": "Profile.ProfessionalDetail.WorkHistories.Employer.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Company.Total": {
+          "cardinality": {
+            "field": "Profile.ProfessionalDetail.WorkHistories.Employer.raw"
+          }
+        }
+      }
+    },
+    "Tags": {
+      "filter": {
+        "exists": {
+          "field": "OrganizationProfile.Tags"
+        }
+      },
+      "aggs": {
+        "Tags.Exists": {
+          "terms": {
+            "field": "OrganizationProfile.Tags.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Tags.Total": {
+          "cardinality": {
+            "field": "OrganizationProfile.Tags.raw"
+          }
+        }
+      }
+    },
+    "Campaigns": {
+      "filter": {
+        "exists": {
+          "field": "OrganizationProfile.Campaigns.Name"
+        }
+      },
+      "aggs": {
+        "Campaigns.Exists": {
+          "terms": {
+            "field": "OrganizationProfile.Campaigns.Name.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Campaigns.Total": {
+          "cardinality": {
+            "field": "OrganizationProfile.Campaigns.Name.raw"
+          }
+        }
+      }
+    },
+    "Educated": {
+      "filter": {
+        "exists": {
+          "field": "Profile.ProfessionalDetail.Education.CourseMajor"
+        }
+      },
+      "aggs": {
+        "Educated.Exists": {
+          "terms": {
+            "field": "Profile.ProfessionalDetail.Education.CourseMajor.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Educated.Total": {
+          "cardinality": {
+            "field": "Profile.ProfessionalDetail.Education.CourseMajor.raw"
+          }
+        }
+      }
+    },
+    "Location": {
+      "filter": {
+        "exists": {
+          "field": "Profile.PersonalDetail.Location.City"
+        }
+      },
+      "aggs": {
+        "Location.Exists": {
+          "terms": {
+            "field": "Profile.PersonalDetail.Location.City.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Location.Total": {
+          "cardinality": {
+            "field": "Profile.PersonalDetail.Location.City"
+          }
+        }
+      }
+    },
+    "Interests": {
+      "filter": {
+        "exists": {
+          "field": "Profile.ProfessionalDetail.Interests.Title"
+        }
+      },
+      "aggs": {
+        "Interests.Exist": {
+          "terms": {
+            "field": "Profile.ProfessionalDetail.Interests.Title.raw",
+            "size": 5,
+            "exclude": ""
+          }
+        },
+        "Interests.Total": {
+          "cardinality": {
+            "field": "Profile.ProfessionalDetail.Interests.Title"
+          }
+        }
+      }
+    }
+  }
+}

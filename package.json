@@ -37,7 +37,7 @@
     "vinyl-source-stream": "1.0.0"
   },
   "dependencies": {
-    "findly-ajax": "https://s3-us-west-1.amazonaws.com/findly.builds/ajax/builds/0.0.6.tar.gz"
+    "elasticsearch": "^10.0.1"
   },
   "keywords": []
 }

@@ -1,13 +1,21 @@
 'use strict';
 
-var ajax = require('findly-ajax');
+var es = require('elasticsearch'),
+  queryBuilder = require('./query-builder'),
+  pacman = require('./pacman.json');
 
 function ESHelper(host) {
   this.host = host;
+
+  this.esClient = new es.Client({
+    host: host,
+    log: 'trace'
+  });
 }
 
-ESHelper.prototype.search = function(query, callback) {
-  var handlers = {
+ESHelper.prototype.search = function(queries, callback) {
+  var data = { body: {}},
+    handlers = {
     success: callback,
     error: function(err) {
       console.error(err);
@@ -15,35 +23,10 @@ ESHelper.prototype.search = function(query, callback) {
     }
   };
 
-  var data = {
-    'size': 0,
-    'aggregations': {
-      'EmployerRaw': {
-        'terms': {
-          'field': 'Keywords.word',
-          'include': '.*uni.*'
-        }
-      }
-    },
-    'query': {
-      'filtered': {
-        'filter': {
-          'and': {
-            'filters': [
-              {
-                'term': {'Keywords': 'uni'}
-              },
-              {
-                'term': {'Keywords': 'washington'}
-              }
-            ]
-          }
-        }
-      }
-    }
-  };
+  pacman.query.filtered.query = queryBuilder.parse(queries);
+  data.body = pacman;
 
-  ajax.postJson(this.host + '/_search', data, handlers);
+  this.esClient.search(data).then(handlers.success, handlers.error);
 };
 
 if (window) {
